@@ -1,4 +1,4 @@
-name=storm-info-provider
+name=storm-dynamic-info-provider
 
 tag=master
 
