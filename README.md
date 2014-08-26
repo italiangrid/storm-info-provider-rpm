@@ -1,6 +1,3 @@
-storm-info-provider-rpm
-=======================
-
 # RPM packaging for the StoRM dynamic info provider 
 
 Spec file and rpmbuild preparation and calls for building rpms for the [StoRM dynamic info provider](https://github.com/italiangrid/storm-info-provider).
