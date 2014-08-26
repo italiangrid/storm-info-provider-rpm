@@ -2,12 +2,16 @@
 %{!?python2_sitelib: %global python2_sitelib %(%{__python2} -c "from distutils.sysconfig import get_python_lib; print(get_python_lib())")}
 %{!?python2_sitearch: %global python2_sitearch %(%{__python2} -c "from distutils.sysconfig import get_python_lib; print(get_python_lib(1))")}
 
+%define _logdir /var/log/info-provider
+%define _confdir /etc/storm/info-provider
+%define _bdiidir /var/lib/bdii/gip
+
 Name: storm-dynamic-info-provider
 Version: 1.7.7
 Release: 0%{?dist}
 Summary: The StoRM dynamic info provider component
 
-Group: Applications/Text
+Group: Development/Libraries
 License: Apache License 2.0
 URL: https://github.com/italiangrid/storm-info-provider
 
@@ -33,22 +37,44 @@ rm -rf $RPM_BUILD_ROOT
 mkdir -p $RPM_BUILD_ROOT
 
 install -d $RPM_BUILD_ROOT%{_libexecdir}
-install -pm 0755 src/storm-info-provider $RPM_BUILD_ROOT%{_libexecdir}/
+install -pm 0755 src/storm-info-provider $RPM_BUILD_ROOT%{_libexecdir}
 
 install -d $RPM_BUILD_ROOT%{python2_sitelib}/info_provider
 install -d $RPM_BUILD_ROOT%{python2_sitelib}/info_provider/glue
-install -pm 0644 src/info_provider/glue/* $RPM_BUILD_ROOT%{python2_sitelib}/info_provider/glue/
-install -pm 0644 src/info_provider/__init__.py $RPM_BUILD_ROOT%{python2_sitelib}/info_provider/
-install -pm 0644 src/info_provider/configuration.py $RPM_BUILD_ROOT%{python2_sitelib}/info_provider/
-install -pm 0644 src/info_provider/http_utils.py $RPM_BUILD_ROOT%{python2_sitelib}/info_provider/
-install -pm 0644 src/info_provider/space_info.py $RPM_BUILD_ROOT%{python2_sitelib}/info_provider/
+install -pm 0644 src/info_provider/glue/* $RPM_BUILD_ROOT%{python2_sitelib}/info_provider/glue
+install -pm 0644 src/info_provider/*.py $RPM_BUILD_ROOT%{python2_sitelib}/info_provider
+
+install -d $RPM_BUILD_ROOT%{_confdir}
+install -d $RPM_BUILD_ROOT%{_confdir}/templates
+install -pm 0755 config/templates/* $RPM_BUILD_ROOT%{_confdir}/templates
+
+install -d $RPM_BUILD_ROOT%{_sysconfdir}
+install -d $RPM_BUILD_ROOT%{_sysconfdir}/logrotate.d
+install -pm 0755 etc/logrotate.d/storm-info-provider $RPM_BUILD_ROOT%{_sysconfdir}/logrotate.d/storm-info-provider
+
+mkdir -p $RPM_BUILD_ROOT%{_logdir}
+chown ldap:ldap $RPM_BUILD_ROOT%{_logdir}
+chmod 755 $RPM_BUILD_ROOT%{_logdir}
 
 %files
 %defattr(-,root,root,-)
-
 %{_libexecdir}/storm-info-provider
-
-%{python2_sitelib}/info_provider/
+%{python2_sitelib}/info_provider
+%{_confdir}/templates
+%{_sysconfdir}/logrotate.d/storm-info-provider
+%{_logdir}
 
 %clean
 rm -rf $RPM_BUILD_ROOT
+
+%postun
+rm -rf %{_bdiidir}/ldif/storm-glue13-static.ldif
+rm -rf %{_bdiidir}/ldif/storm-glue2-static.ldif
+rm -rf %{_bdiidir}/provider/storm-glue13-provider
+rm -rf %{_bdiidir}/plugin/storm-glue13-plugin
+rm -rf %{_bdiidir}/provider/storm-glue2-provider
+rm -rf %{_bdiidir}/plugin/storm-glue2-plugin
+
+%changelog
+* Tue Aug 26 2014 - Enrico Vianello
+- Initial implementation
