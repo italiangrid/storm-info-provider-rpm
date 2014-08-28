@@ -24,6 +24,7 @@ BuildRequires: python2-devel
 Requires: python
 Requires: python-ldap
 Requires: python-argparse
+Requires: bdii
 
 %description
 This is the installation bundle for the StoRM info provider component.
@@ -47,16 +48,11 @@ install -d $RPM_BUILD_ROOT%{_confdir}
 install -d $RPM_BUILD_ROOT%{_confdir}/templates
 install -pm 0755 config/templates/* $RPM_BUILD_ROOT%{_confdir}/templates
 
-install -d $RPM_BUILD_ROOT%{_sysconfdir}
-install -d $RPM_BUILD_ROOT%{_sysconfdir}/logrotate.d
-install -pm 0755 etc/logrotate.d/storm-info-provider $RPM_BUILD_ROOT%{_sysconfdir}/logrotate.d/storm-info-provider
-
 %files
 %defattr(-,root,root,-)
 %{_libexecdir}/storm-info-provider
 %{python2_sitelib}/info_provider
 %{_confdir}/templates
-%{_sysconfdir}/logrotate.d/storm-info-provider
 
 %clean
 rm -rf $RPM_BUILD_ROOT
