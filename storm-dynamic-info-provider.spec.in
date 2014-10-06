@@ -48,11 +48,15 @@ install -d $RPM_BUILD_ROOT%{_confdir}
 install -d $RPM_BUILD_ROOT%{_confdir}/templates
 install -pm 0755 config/templates/* $RPM_BUILD_ROOT%{_confdir}/templates
 
+install -d $RPM_BUILD_ROOT%{_mandir}/man1
+install -pm 0644 man/* $RPM_BUILD_ROOT%{_mandir}/man1
+
 %files
 %defattr(-,root,root,-)
 %{_libexecdir}/storm-info-provider
 %{python2_sitelib}/info_provider
 %{_confdir}/templates
+%{_mandir}/man1/*
 
 %clean
 rm -rf $RPM_BUILD_ROOT
