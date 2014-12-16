@@ -7,7 +7,7 @@
 
 Name: storm-dynamic-info-provider
 Version: 1.7.7
-Release: 0%{?dist}
+Release: 1%{?dist}
 Summary: The StoRM dynamic info provider component
 
 Group: Development/Libraries
@@ -70,5 +70,5 @@ rm -rf %{_bdiidir}/provider/storm-glue2-provider
 rm -rf %{_bdiidir}/plugin/storm-glue2-plugin
 
 %changelog
-* Tue Aug 26 2014 - Enrico Vianello
-- Initial implementation
+* Wed Nov 12 2014 Enrico Vianello <enrico.vianello at cnaf.infn.it> - 1.7.7-1
+- Packaging for new python-based info provider
