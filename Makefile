@@ -44,7 +44,11 @@ rpm: prepare-spec
 		$(rpmbuild_dir)/SPECS \
 		$(rpmbuild_dir)/SRPMS
 	cp $(source_dir)/$(name).tar.gz $(rpmbuild_dir)/SOURCES/$(name)-$(rpm_version).tar.gz
+ifndef sl5extra
 	rpmbuild --nodeps -v -ba $(spec) --define "_topdir $(rpmbuild_dir)" --define "dist $(dist)"
+else
+	rpmbuild --nodeps -v -ba $(spec) --define "_topdir $(rpmbuild_dir)" --define "dist $(dist)" --define "sl5extra $(sl5extra)"
+endif
 
 clean:
 	rm -rf $(source_dir) $(rpmbuild_dir) $(spec)

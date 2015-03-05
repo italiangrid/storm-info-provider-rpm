@@ -26,6 +26,11 @@ Requires: python-ldap
 Requires: python-argparse
 Requires: bdii
 
+%if %{?sl5extra:1}%{!?sl5extra:0} 
+%define extra %{sl5extra}
+Requires: %{extra}
+%endif
+
 %description
 This is the installation bundle for the StoRM info provider component.
 
