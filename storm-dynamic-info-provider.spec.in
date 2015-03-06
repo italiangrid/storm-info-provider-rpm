@@ -26,9 +26,8 @@ Requires: python-ldap
 Requires: python-argparse
 Requires: bdii
 
-%if %{?sl5extra:1}%{!?sl5extra:0} 
-%define extra %{sl5extra}
-Requires: %{extra}
+%if %{?python_json_package:1}%{!?python_json_package:0} 
+Requires: %{python_json_package}
 %endif
 
 %description
