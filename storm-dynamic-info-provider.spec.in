@@ -26,6 +26,10 @@ Requires: python-ldap
 Requires: python-argparse
 Requires: bdii
 
+%if %{?python_json_package:1}%{!?python_json_package:0} 
+Requires: %{python_json_package}
+%endif
+
 %description
 This is the installation bundle for the StoRM info provider component.
 
