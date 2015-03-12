@@ -6,8 +6,8 @@
 %define _bdiidir /var/lib/bdii/gip
 
 Name: storm-dynamic-info-provider
-Version: 1.7.7
-Release: 2%{?dist}
+Version: 1.7.8
+Release: 0%{?dist}
 Summary: The StoRM dynamic info provider component
 
 Group: Development/Libraries
@@ -74,6 +74,9 @@ rm -rf %{_bdiidir}/provider/storm-glue2-provider
 rm -rf %{_bdiidir}/plugin/storm-glue2-plugin
 
 %changelog
+* Thu Mar 12 2015 Enrico Vianello <enrico.vianello at cnaf.infn.it> - 1.7.8-0
+  Bumped version to 1.7.8-0
+
 * Thu Mar 12 2015 Enrico Vianello <enrico.vianello at cnaf.infn.it> - 1.7.7-2
 - Repackaged to add python-simplejson dependency on EL5
 
