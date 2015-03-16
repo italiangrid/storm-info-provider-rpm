@@ -44,7 +44,11 @@ rpm: prepare-spec
 		$(rpmbuild_dir)/SPECS \
 		$(rpmbuild_dir)/SRPMS
 	cp $(source_dir)/$(name).tar.gz $(rpmbuild_dir)/SOURCES/$(name)-$(rpm_version).tar.gz
+ifndef python_json_package
 	rpmbuild --nodeps -v -ba $(spec) --define "_topdir $(rpmbuild_dir)" --define "dist $(dist)"
+else
+	rpmbuild --nodeps -v -ba $(spec) --define "_topdir $(rpmbuild_dir)" --define "dist $(dist)" --define "python_json_package $(python_json_package)"
+endif
 
 clean:
 	rm -rf $(source_dir) $(rpmbuild_dir) $(spec)
