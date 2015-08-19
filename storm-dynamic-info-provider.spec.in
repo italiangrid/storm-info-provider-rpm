@@ -7,7 +7,7 @@
 
 Name: storm-dynamic-info-provider
 Version: 1.7.8
-Release: 1%{?dist}
+Release: 2%{?dist}
 Summary: The StoRM dynamic info provider component
 
 Group: Development/Libraries
@@ -25,6 +25,7 @@ Requires: python
 Requires: python-ldap
 Requires: python-argparse
 Requires: bdii
+Requires: glite-info-provider-service
 
 %if %{?python_json_package:1}%{!?python_json_package:0} 
 Requires: %{python_json_package}
@@ -74,6 +75,9 @@ rm -rf %{_bdiidir}/provider/storm-glue2-provider
 rm -rf %{_bdiidir}/plugin/storm-glue2-plugin
 
 %changelog
+* Tue Apr 21 2015 Enrico Vianello <enrico.vianello at cnaf.infn.it> - 1.7.8-2
+  Added required package and bumped version to 1.7.8-2
+
 * Fri Mar 13 2015 Enrico Vianello <enrico.vianello at cnaf.infn.it> - 1.7.8-1
   Bumped version to 1.7.8-1 for StoRM v1.11.8 release
 
