@@ -75,6 +75,9 @@ rm -rf %{_bdiidir}/provider/storm-glue2-provider
 rm -rf %{_bdiidir}/plugin/storm-glue2-plugin
 
 %changelog
+* Mon Jan 18 2016 Enrico Vianello <enrico.vianello at cnaf.infn.it> - 1.7.9-1
+  Bumped version to 1.7.9-1
+
 * Wed Aug 19 2015 Enrico Vianello <enrico.vianello at cnaf.infn.it> - 1.7.9-0
   Bumped version to 1.7.9-0
 
